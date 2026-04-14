@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdSync Engine v0.5</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* Modern tweaks for the one-click experience */
+        .grid { grid-template-columns: 1fr; max-width: 800px; }
+        .hero-banner { background: #1e1b4b; color: white; padding: 40px; border-radius: 12px; margin-bottom: 24px; text-align: center; }
+        .hero-banner h1 { font-size: 24px; margin-bottom: 8px; }
+        .hero-banner p { opacity: 0.7; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <div class="brand">
+            <div class="brand-icon">AS</div>
+            <div style="font-weight: 600;">AdSync One-Click</div>
+        </div>
+        <div class="nav-section">
+            <h4>History</h4>
+            <div class="history-item active">New Generation</div>
+            <div id="history-list"></div>
+        </div>
+        <div style="padding: 20px; font-size: 11px; color: var(--text-muted); border-top: 1px solid var(--border);">
+            v0.5.0-oneclick <br>
+            Build: 2026-04-12
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <div style="font-weight: 500;">Ad-to-Page Generator</div>
+            <div style="display: flex; gap: 12px;">
+                <div id="status-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #22c55e;"></div>
+                <span style="font-size: 11px; color: var(--text-muted);">System Operational</span>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <div class="hero-banner">
+                <h1>From Ad to Landing Page in Seconds</h1>
+                <p>Upload your ad creative. Our AI will analyze the messaging and build a high-converting, perfectly matched landing page automatically.</p>
+            </div>
+
+            <div class="grid">
+                
+                <!-- Input Card -->
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">Ad Creative Input</h3>
+                    <form id="personalize-form">
+                        <div class="field">
+                            <label>Creative Asset (Image File)</label>
+                            <div class="upload-box" id="upload-zone" style="background: #fdfcfb;">
+                                <span id="upload-text">Drop ad image or click to browse</span>
+                                <input type="file" id="file-input" hidden accept="image/*">
+                            </div>
+                            <div id="file-info" style="margin-top: 8px; font-size: 12px; display: none; color: #4338ca; font-weight: 500;"></div>
+                        </div>
+
+                        <div style="text-align: center; margin: 15px 0; font-size: 11px; color: var(--text-muted); font-weight: 600;">OR PASTE IMAGE URL</div>
+
+                        <div class="field">
+                            <input type="url" id="ad-url" placeholder="https://cdn.example.com/ad-creative.jpg">
+                        </div>
+
+                        <button type="submit" id="submit-btn" class="btn btn-primary" style="height: 54px; font-size: 16px; margin-top: 10px;">
+                            🚀 Generate Landing Page
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Process Log -->
+                <div class="card" id="results-log" style="display: none; background: #fafafa; border-style: dashed;">
+                    <h4 style="margin-bottom: 12px; font-size: 12px; color: var(--text-muted);">ENGINE SUBSYSTEM LOGS</h4>
+                    <div id="log-content" class="mono" style="max-height: 200px; overflow-y: auto; background: #0f172a; color: #94a3b8; padding: 15px; border-radius: 8px; border: 1px solid #1e293b;">
+                    </div>
+                </div>
+
+                <!-- Preview Area -->
+                <div id="preview-area" style="display: none; margin-top: 40px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <h2 style="font-size: 18px; font-weight: 700;">Generated Output</h2>
+                        <div style="display: flex; gap: 10px;">
+                             <button class="btn" style="width: auto; background: white; border: 1px solid var(--border);" onclick="downloadHTML()">Download File</button>
+                            <button class="btn btn-primary" style="width: auto;" onclick="openNewTab()">Open Fullscreen</button>
+                        </div>
+                    </div>
+
+                    <div class="results-preview">
+                        <div class="preview-header">
+                            <div>Browser Sandbox (Interpreted)</div>
+                        </div>
+                        <iframe id="preview-iframe"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div class="overlay" id="loading-overlay">
+        <div class="loader">
+            <div style="font-weight: 600; margin-bottom: 10px; font-size: 18px;">Engineering Page...</div>
+            <div id="loading-status" style="font-size: 14px; color: var(--text-muted);">Synthesizing ad metadata</div>
+            <div style="margin-top: 20px; width: 100%; height: 4px; background: #f3f4f6; border-radius: 2px; overflow: hidden;">
+                <div style="width: 40%; height: 100%; background: #4338ca; animation: slide 1.5s infinite linear;"></div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+    </style>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
